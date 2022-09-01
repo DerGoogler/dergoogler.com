@@ -1,6 +1,4 @@
-
-
----- Fake Shell Charger ----
+<divider><h1>Fake Shell Charger</h1></divider>
 
 This is not a real charger, here can you troll your friends
 
@@ -33,7 +31,7 @@ setBattery 2000
 
 ### Unplug Battery
 
-alert[warn](This can be buggy, avoid using this.)
+<alert severity="info">This can be buggy — avoid using this.</alert>
 
 ```sh
 unplugBattery
