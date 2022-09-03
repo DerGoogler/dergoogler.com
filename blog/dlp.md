@@ -1,4 +1,10 @@
-alert[info](This is an test post!)
+<!-- @meta
+title: Dev Landing Page
+desc: An simple dev landing page
+author: Admin Author
+-->
+
+<!-- @meta coolFactor: high -->
 
 # Dev Landing Page
 
