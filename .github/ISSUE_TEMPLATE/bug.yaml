@@ -9,7 +9,6 @@ body:
         Ensure your Android device meets the requirements:
         - Android Version: 8.0 (API level 26) or higher.
         - (Verify API levels [here](https://developer.android.com/tools/releases/platforms)).
-
         > If issues persist, gather logs using Android Studio's LogCat. Refer to this [Video Tutorial](https://www.youtube.com/watch?v=smOzLSTaso0) for guidance.
   - type: input
     id: phone-model
