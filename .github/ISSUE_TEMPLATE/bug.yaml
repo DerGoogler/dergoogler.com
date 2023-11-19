@@ -1,45 +1,51 @@
-name: Bug
-description: File a bug/issue
-title: "[BUG]: "
-labels: ["bug"]
+name: Module Submission
+description: Preferred Magisk Module submission template
+title: "[Module] "
+labels: ["module"]
 body:
   - type: markdown
     attributes:
       value: |
-        Ensure your Android device meets the requirements:
-        - Android Version: 8.0 (API level 26) or higher.
-        - (Verify API levels [here](https://developer.android.com/tools/releases/platforms)).
-        > If issues persist, gather logs using Android Studio's LogCat. Refer to this [Video Tutorial](https://www.youtube.com/watch?v=smOzLSTaso0) for guidance.
+        <!--
+        PLEASE READ:
+        1. ID must match the id in module.prop
+        2. Once approved, your module will be added to our repo as http://github.com/magisk-modules-alt-repo/example_module
+        3. Read all requirements before submit for approval:
+          - https://github.com/Magisk-Modules-Alt-Repo/submission#source-code-guidelines
+          - https://github.com/Magisk-Modules-Alt-Repo/submission#general-guidelines
+
   - type: input
-    id: phone-model
+    id: module-id
     attributes:
-      label: Phone Model
-      description: Settings > About phone > Model (hold & copy)
-      placeholder: SM-A705FN
+      label: ID
+      placeholder: example_module
     validations:
       required: true
   - type: input
-    id: android-version
+    id: module-name
     attributes:
-      label: Android Version
-      description: Settings > About phone > Android version
-      placeholder: Android 14
+      label: Name
+      placeholder: Example Module
     validations:
       required: true
   - type: textarea
-    id: detailed-issue-desc
+    id: module-description
     attributes:
-      label: Detailed Issue Description
-      placeholder: |
-         - In this environment...
-         - With this config...
-         - Run '...'
-         - See error...
+      label: Description
+      placeholder: A simple module that does this, that, and the other thing.
     validations:
       required: true
-  - type: textarea
-    id: logs
+  - type: input
+    id: module-link
     attributes:
-      label: Logs
+      label: Link
+      placeholder: https://www.github.com/username/repo
     validations:
-      required: false
+      required: true
+  - type: input
+    id: module-source-code
+    attributes:
+      label: Link
+      placeholder: None
+    validations:
+      required: false      
