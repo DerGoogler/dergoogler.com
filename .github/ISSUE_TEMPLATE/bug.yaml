@@ -6,7 +6,6 @@ body:
   - type: markdown
     attributes:
       value: |
-        <!--
         PLEASE READ:
         1. ID must match the id in module.prop
         2. Once approved, your module will be added to our repo as http://github.com/magisk-modules-alt-repo/example_module
