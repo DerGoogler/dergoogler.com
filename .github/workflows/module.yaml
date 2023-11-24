@@ -19,7 +19,7 @@ jobs:
       - name: Get module properties
         id: props
         uses: christian-draeger/read-properties@1.1.1
-         with:
+        with:
             path: "module.prop"
             properties: 'id version versionCode'
 
