@@ -16,14 +16,21 @@ jobs:
           sudo apt update -y && sudo apt upgrade -y
           sudo apt install zip unzip -y
 
-      - name: Build ${{ github.event.repository.name }}.zip
+      - name: Get module properties
+        id: props
+        uses: christian-draeger/read-properties@1.1.1
+         with:
+            path: "module.prop"
+            properties: 'id version versionCode'
+
+      - name: Build ${{ steps.read_property.props.id }}.zip
         shell: bash
         run: |
-          zip -r "${{ github.event.repository.name }}.zip" * -x ".git" -x "README.md"
+          zip -r "${{ steps.read_property.props.id }}-${{ steps.read_property.props.version }}_(${{ steps.read_property.props.versionCode }}).zip" * -x ".git" -x "README.md"
           
       - name: Publish
         uses: softprops/action-gh-release@v1
         with:
-            files: "${{ github.event.repository.name }}.zip"
+            files: "${{ steps.read_property.props.id }}-${{ steps.read_property.props.version }}_(${{ steps.read_property.props.versionCode }}).zip"
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
