@@ -23,14 +23,14 @@ jobs:
             path: "module.prop"
             properties: 'id version versionCode'
 
-      - name: Build ${{ steps.read_property.props.id }}.zip
+      - name: Build ${{ steps.props.outputs.id }}.zip
         shell: bash
         run: |
-          zip -r "${{ steps.read_property.props.id }}-${{ steps.read_property.props.version }}_(${{ steps.read_property.props.versionCode }}).zip" * -x ".git" -x "README.md"
+          zip -r "${{ steps.props.outputs.id }}-${{ steps.props.outputs.version }}_(${{ steps.props.outputs.versionCode }}).zip" * -x ".git" -x "README.md"
           
       - name: Publish
         uses: softprops/action-gh-release@v1
         with:
-            files: "${{ steps.read_property.props.id }}-${{ steps.read_property.props.version }}_(${{ steps.read_property.props.versionCode }}).zip"
+            files: "${{ steps.props.outputs.id }}-${{ steps.props.outputs.version }}_(${{ steps.props.outputs.versionCode }}).zip"
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
