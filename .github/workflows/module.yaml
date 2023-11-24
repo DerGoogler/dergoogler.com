@@ -1,36 +1,13 @@
-name: Build Magisk/KernelSU Module
-
+name: "test"
 on:
   push:
     tags: [ v*.*.* ]
-
 jobs:
-  build:
-    name: Build Module
+  test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Setup Apt Dependencies
-        run: |
-          sudo apt update -y && sudo apt upgrade -y
-          sudo apt install zip unzip -y
-
-      - name: Get module properties
-        id: props
-        uses: christian-draeger/read-properties@1.1.1
-        with:
-            path: "module.prop"
-            properties: 'id version versionCode'
-
-      - name: Build ${{ steps.props.outputs.id }}.zip
-        shell: bash
-        run: |
-          zip -r "${{ steps.props.outputs.id }}-${{ steps.props.outputs.version }}_(${{ steps.props.outputs.versionCode }}).zip" * -x ".git" -x "README.md"
-          
-      - name: Publish
-        uses: softprops/action-gh-release@v1
-        with:
-            files: "${{ steps.props.outputs.id }}-${{ steps.props.outputs.version }}_(${{ steps.props.outputs.versionCode }}).zip"
-        env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - uses: actions/checkout@v1
+    - name: Build
+      id: version
+      uses: ./
+      
