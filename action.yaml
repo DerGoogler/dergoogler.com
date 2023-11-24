@@ -2,10 +2,6 @@ name: 'Makisk/KernelSU Mobule Builder'
 description: 'A GitHub Action to generate a Magisk/KernelSU Module'
 author: 'Der_Googler & Googlers Repo'
 
-on:
-  push:
-    tags: [ v*.*.* ]
-
 inputs:
   file-to-upload:
     description: "File to upload in releases"
