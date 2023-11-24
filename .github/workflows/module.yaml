@@ -16,26 +16,14 @@ jobs:
           sudo apt update -y && sudo apt upgrade -y
           sudo apt install zip unzip -y
 
-      - name: Make
+      - name: Build ${{ github.event.repository.name }}.zip
         shell: bash
         run: |
-          get_prop() { sed -n "s|^$1=||p" "module.prop"; }
-          ID=$(get_prop "id")
-          FILE_NAME="$ID-release"
-          FILE_NAME_ZIP="$FILE_NAME.zip"
-          zip -9 -r "$FILE_NAME_ZIP" * -x ".git"
-  
-  deploy:
-      name: Deploy
-      needs: [ build ]
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v2
-  
-        - name: Publish
-          uses: softprops/action-gh-release@v1
-          with:
-              files: '*-release.zip'
-              draft: true
-          env:
+          zip -r "${{ github.event.repository.name }}.zip" * -x ".git" -x "README.md"
+          
+      - name: Publish
+        uses: softprops/action-gh-release@v1
+        with:
+            files: "${{ github.event.repository.name }}.zip"
+        env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
