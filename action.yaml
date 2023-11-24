@@ -1,18 +1,7 @@
 name: 'Makisk/KernelSU Mobule Builder'
 description: 'A GitHub Action to generate a Magisk/KernelSU Module'
 author: 'Der_Googler & Googlers Repo'
-
-inputs:
-  file-to-upload:
-    description: "File to upload in releases"
-    required: false
-    default: "${{ steps.props.outputs.id }}-${{ steps.props.outputs.version }}_(${{ steps.props.outputs.versionCode }}).zip"
-   
-  module-props-file:
-    description: "Properties where to pick from"
-    required: false
-    default: "module.prop"
-      
+     
 runs:
   using: "composite"
   steps:
@@ -28,18 +17,18 @@ runs:
       id: props
       uses: christian-draeger/read-properties@1.1.1
        with:
-          path: "${{ inputs.module-props-file }}""
+          path: "module.prop"
           properties: 'id version versionCode'
  
     - name: Build module
       shell: bash
       run: |
-         zip -r "${{ inputs.file-to-upload }}" * -x ".git" -x "README.md"
+         zip -r "${{ steps.props.outputs.id }}-${{ steps.props.outputs.version }}_(${{ steps.props.outputs.versionCode }}).zip" * -x ".git" -x "README.md"
           
     - name: Publish
       uses: softprops/action-gh-release@v1
       with:
-          files: "${{ inputs.file-to-upload }}"
+          files: "${{ steps.props.outputs.id }}-${{ steps.props.outputs.version }}_(${{ steps.props.outputs.versionCode }}).zip"
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
