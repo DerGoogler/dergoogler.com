@@ -1,7 +1,9 @@
 name: "test"
 on:
+  workflow_dispatch:
   push:
     tags: [ v*.*.* ]
+    
 jobs:
   test:
     runs-on: ubuntu-latest
